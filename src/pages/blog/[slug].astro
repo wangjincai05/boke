@@ -1,0 +1,74 @@
+---
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Layout/Header.astro";
+import Footer from "../../components/Layout/Footer.astro";
+import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
+import RelatedPosts from "../../components/Content/RelatedPosts.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts
+    .filter((p) => !p.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const allPosts = (await getCollection("blog")).filter((p) => !p.data.draft);
+const { Content } = await post.render();
+---
+
+<BaseLayout>
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <article class="mx-auto max-w-3xl px-4 py-12">
+        <Breadcrumb
+          items={[
+            { label: "首页", href: "/" },
+            { label: "文章", href: "/blog" },
+            { label: post.data.title },
+          ]}
+        />
+
+        <div class="mb-8">
+          <div class="flex flex-wrap gap-2 mb-4">
+            {post.data.tags.map((tag: string) => (
+              <a
+                href={`/tags/${tag}`}
+                class="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-3">
+            {post.data.title}
+          </h1>
+          <p class="text-lg text-muted-foreground mb-4">{post.data.description}</p>
+          <time
+            datetime={post.data.date.toISOString()}
+            class="text-sm text-muted-foreground"
+          >
+            {post.data.date.toLocaleDateString("zh-CN", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+        </div>
+
+        <div class="article-content">
+          <Content />
+        </div>
+
+        <RelatedPosts current={post} all={allPosts} />
+      </article>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

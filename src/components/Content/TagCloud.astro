@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  tags: { name: string; count: number }[];
+  activeTag?: string;
+}
+const { tags, activeTag } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2">
+  {tags.map((tag) => (
+    <a
+      href={activeTag === tag.name ? "/blog" : `/tags/${tag.name}`}
+      class:list={[
+        "inline-flex items-center rounded-md px-3 py-1 text-sm font-medium transition-colors",
+        activeTag === tag.name
+          ? "bg-primary text-primary-foreground"
+          : "bg-accent text-accent-foreground hover:bg-primary/10 hover:text-primary",
+      ]}
+    >
+      {tag.name}
+      <span class="ml-1.5 text-xs opacity-60">{tag.count}</span>
+    </a>
+  ))}
+</div>

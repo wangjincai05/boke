@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ArticleCard from "./ArticleCard.astro";
+
+export interface Props {
+  current: CollectionEntry<"blog">;
+  all: CollectionEntry<"blog">[];
+}
+
+const { current, all } = Astro.props;
+const related = all
+  .filter((p) => p.slug !== current.slug)
+  .filter((p) => p.data.tags.some((t: string) => current.data.tags.includes(t)))
+  .slice(0, 3);
+---
+
+{related.length > 0 && (
+  <section class="mt-12">
+    <h2 class="text-lg font-semibold mb-4">相关文章</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {related.map((post) => (
+        <ArticleCard post={post} />
+      ))}
+    </div>
+  </section>
+)}

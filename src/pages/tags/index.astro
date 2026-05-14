@@ -1,0 +1,33 @@
+---
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Layout/Header.astro";
+import Footer from "../../components/Layout/Footer.astro";
+import TagCloud from "../../components/Content/TagCloud.astro";
+import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
+import { getCollection } from "astro:content";
+import { getAllTags } from "../../lib/search";
+
+const posts = await getCollection("blog");
+const tags = getAllTags(posts);
+---
+
+<BaseLayout>
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <div class="mx-auto max-w-6xl px-4 py-12">
+        <Breadcrumb
+          items={[
+            { label: "首页", href: "/" },
+            { label: "标签" },
+          ]}
+        />
+
+        <h1 class="text-3xl font-bold mb-8">所有标签</h1>
+        <TagCloud tags={tags} />
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

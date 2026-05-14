@@ -1,0 +1,57 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<script>
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      const input = document.getElementById("search-input");
+      if (input) input.focus();
+    }
+  });
+</script>
+
+<header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+  <div class="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold text-primary hover:opacity-80 transition-opacity">
+      我的博客
+    </a>
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">首页</a>
+      <a href="/blog" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">文章</a>
+      <a href="/tags" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">标签</a>
+      <a href="/about" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">关于</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <button id="mobile-menu-btn" class="md:hidden text-muted-foreground hover:text-foreground" aria-label="打开菜单">
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <ThemeToggle />
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background">
+    <nav class="flex flex-col px-4 py-4 gap-3">
+      <a href="/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">首页</a>
+      <a href="/blog" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">文章</a>
+      <a href="/tags" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">标签</a>
+      <a href="/about" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">关于</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden", isOpen);
+    menuIcon?.classList.toggle("hidden", !isOpen);
+    closeIcon?.classList.toggle("hidden", isOpen);
+  });
+</script>

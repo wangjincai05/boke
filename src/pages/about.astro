@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Layout/Header.astro";
+import Footer from "../components/Layout/Footer.astro";
+import { siteConfig } from "../config";
+---
+
+<BaseLayout>
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <div class="mx-auto max-w-3xl px-4 py-16">
+        <h1 class="text-3xl font-bold mb-6">关于</h1>
+        <div class="article-content">
+          <p>
+            欢迎来到我的博客！我是一名软件开发者，热衷于探索前沿技术和分享实践经验。
+          </p>
+          <p>
+            这个博客使用 <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> 构建，
+            采用极简设计风格，支持暗黑模式切换，所有文章均使用 Markdown 编写。
+          </p>
+          <h2>关于本站</h2>
+          <p>
+            本站主要分享以下方向的内容：
+          </p>
+          <ul>
+            <li>前端技术（React、Vue、TypeScript 等）</li>
+            <li>后端开发（Node.js、Python 等）</li>
+            <li>开发工具与效率提升</li>
+            <li>项目经验与心得</li>
+          </ul>
+          <h2>联系我</h2>
+          <p>
+            如果你有任何问题或建议，欢迎通过以下方式联系我：
+          </p>
+          <ul>
+            <li>GitHub: <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer">{siteConfig.socials.github}</a></li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

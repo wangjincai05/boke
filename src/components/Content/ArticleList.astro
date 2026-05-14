@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ArticleCard from "./ArticleCard.astro";
+
+export interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+const { posts } = Astro.props;
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {posts.map((post) => (
+    <ArticleCard post={post} />
+  ))}
+</div>
+
+{posts.length === 0 && (
+  <p class="text-center text-muted-foreground py-12">暂无文章</p>
+)}
