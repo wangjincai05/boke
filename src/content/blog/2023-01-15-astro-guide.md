@@ -1,7 +1,7 @@
 ---
 title: "Astro 入门指南：构建现代化静态站点"
 description: "深入浅出地介绍 Astro 框架的核心概念和使用方法，帮助你快速上手构建高性能静态网站。"
-date: 2024-01-15
+date: 2023-01-15
 tags: ["Astro", "前端", "静态站点"]
 categories: ["前端"]
 featured: true
