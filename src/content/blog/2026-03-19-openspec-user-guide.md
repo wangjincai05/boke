@@ -1,6 +1,6 @@
 ---
 title: 'OpenSpec 使用文档完整指南'
-date: 2026-05-19
+date: 2026-03-19
 description: 'OpenSpec 规范驱动开发框架的完整使用文档，包含安装、配置、核心工作流和最佳实践'
 tags: ['OpenSpec', '开发工具', 'AI编程', '工作流']
 ---
