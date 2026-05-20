@@ -5,6 +5,8 @@ export interface ReadingStats {
 }
 
 export function countWords(text: string): number {
+  if (typeof text !== "string") return 0;
+  
   const chineseChars = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
   const englishWords = text
     .replace(/[\u4e00-\u9fa5]/g, " ")
@@ -24,11 +26,15 @@ export function calculateReadingTime(text: string, wordsPerMinute: number = 400)
 }
 
 export function getReadingStats(text: string): ReadingStats {
+  if (typeof text !== "string") {
+    return { characters: 0, words: 0, readingTime: 1 };
+  }
+  
   const words = countWords(text);
   return {
     characters: countCharacters(text),
     words,
-    readingTime: calculateReadingTime(words),
+    readingTime: calculateReadingTime(text),
   };
 }
 
