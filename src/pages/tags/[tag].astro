@@ -5,6 +5,7 @@ import Header from "../../components/Layout/Header.astro";
 import Footer from "../../components/Layout/Footer.astro";
 import ArticleList from "../../components/Content/ArticleList.astro";
 import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
+import SeoHead from "../../components/SeoHead.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -30,6 +31,10 @@ const posts = allPosts
 ---
 
 <BaseLayout>
+  <SeoHead
+    title={`标签：${tag}`}
+    description={`浏览所有带有「${tag}」标签的文章，共 ${posts.length} 篇`}
+  />
   <div class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">
