@@ -1,0 +1,58 @@
+---
+export interface Props {
+  repo?: string;
+  repoId?: string;
+  category?: string;
+  categoryId?: string;
+  mapping?: "pathname" | "url" | "title" | "og:title";
+  reactionsEnabled?: "1" | "0";
+  emitMetadata?: "1" | "0";
+  inputPosition?: "top" | "bottom";
+  theme?: string;
+  lang?: string;
+  loading?: "lazy" | "eager";
+}
+
+const {
+  repo = "your-username/your-repo",
+  repoId = "",
+  category = "Announcements",
+  categoryId = "",
+  mapping = "pathname",
+  reactionsEnabled = "1",
+  emitMetadata = "0",
+  inputPosition = "top",
+  theme = "preferred_color_scheme",
+  lang = "zh-CN",
+  loading = "lazy",
+} = Astro.props;
+---
+
+<div class="giscus-container mt-12 border-t border-border pt-12">
+  <h3 class="text-xl font-semibold mb-6">评论</h3>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo={repo}
+    data-repo-id={repoId}
+    data-category={category}
+    data-category-id={categoryId}
+    data-mapping={mapping}
+    data-strict="0"
+    data-reactions-enabled={reactionsEnabled}
+    data-emit-metadata={emitMetadata}
+    data-input-position={inputPosition}
+    data-theme={theme}
+    data-lang={lang}
+    data-loading={loading}
+    crossorigin="anonymous"
+    async
+  ></script>
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    .giscus-container {
+      padding: 0 1rem;
+    }
+  }
+</style>

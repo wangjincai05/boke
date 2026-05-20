@@ -6,11 +6,13 @@ import Footer from "../../components/Layout/Footer.astro";
 import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
 import TableOfContents from "../../components/Navigation/TableOfContents.astro";
 import RelatedPosts from "../../components/Content/RelatedPosts.astro";
+import Giscus from "../../components/Content/Giscus.astro";
 import SeoHead from "../../components/SeoHead.astro";
 import CodeCopyButton from "../../components/Content/CodeCopyButton.astro";
 import { getCollection } from "astro:content";
 import { extractHeadings } from "../../lib/toc";
 import { getReadingStats, formatNumber } from "../../lib/readingStats";
+import { siteConfig } from "../../config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -107,6 +109,20 @@ const stats = getReadingStats(post.body);
             <div class="article-content">
               <Content />
             </div>
+
+            <Giscus
+              repo={siteConfig.giscus.repo}
+              repoId={siteConfig.giscus.repoId}
+              category={siteConfig.giscus.category}
+              categoryId={siteConfig.giscus.categoryId}
+              mapping={siteConfig.giscus.mapping}
+              reactionsEnabled={siteConfig.giscus.reactionsEnabled}
+              emitMetadata={siteConfig.giscus.emitMetadata}
+              inputPosition={siteConfig.giscus.inputPosition}
+              theme={siteConfig.giscus.theme}
+              lang={siteConfig.giscus.lang}
+              loading={siteConfig.giscus.loading}
+            />
 
             <RelatedPosts current={post} all={allPosts} />
           </article>
