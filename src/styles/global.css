@@ -5,6 +5,34 @@
 @layer base {
   :root {
     --radius: 0.5rem;
+    --color-background: hsl(240, 10%, 98%);
+    --color-foreground: hsl(240, 10%, 3%);
+    --color-card: hsl(0, 0%, 100%);
+    --color-card-foreground: hsl(240, 10%, 10%);
+    --color-primary: hsl(243, 75%, 59%);
+    --color-primary-foreground: hsl(0, 0%, 100%);
+    --color-secondary: hsl(240, 5%, 84%);
+    --color-secondary-foreground: hsl(240, 10%, 30%);
+    --color-muted: hsl(240, 5%, 96%);
+    --color-muted-foreground: hsl(240, 5%, 46%);
+    --color-accent: hsl(240, 5%, 96%);
+    --color-accent-foreground: hsl(240, 10%, 10%);
+    --color-border: hsl(240, 6%, 90%);
+    --color-ring: hsl(243, 75%, 59%);
+  }
+
+  [data-theme="dark"] {
+    --color-background: hsl(240, 10%, 3%);
+    --color-foreground: hsl(240, 10%, 97%);
+    --color-card: hsl(240, 10%, 8%);
+    --color-card-foreground: hsl(240, 10%, 97%);
+    --color-secondary: hsl(240, 5%, 16%);
+    --color-secondary-foreground: hsl(240, 10%, 80%);
+    --color-muted: hsl(240, 5%, 16%);
+    --color-muted-foreground: hsl(240, 5%, 60%);
+    --color-accent: hsl(240, 5%, 16%);
+    --color-accent-foreground: hsl(240, 10%, 97%);
+    --color-border: hsl(240, 6%, 15%);
   }
 
   body {

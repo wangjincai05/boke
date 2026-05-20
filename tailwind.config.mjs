@@ -5,30 +5,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(240, 10%, 98%)",
-        foreground: "hsl(240, 10%, 3%)",
+        background: "var(--color-background)",
+        foreground: "var(--color-foreground)",
         card: {
-          DEFAULT: "hsl(0, 0%, 100%)",
-          foreground: "hsl(240, 10%, 10%)",
+          DEFAULT: "var(--color-card)",
+          foreground: "var(--color-card-foreground)",
         },
         primary: {
-          DEFAULT: "hsl(243, 75%, 59%)",
-          foreground: "hsl(0, 0%, 100%)",
+          DEFAULT: "var(--color-primary)",
+          foreground: "var(--color-primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(240, 5%, 84%)",
-          foreground: "hsl(240, 10%, 30%)",
+          DEFAULT: "var(--color-secondary)",
+          foreground: "var(--color-secondary-foreground)",
         },
         muted: {
-          DEFAULT: "hsl(240, 5%, 96%)",
-          foreground: "hsl(240, 5%, 46%)",
+          DEFAULT: "var(--color-muted)",
+          foreground: "var(--color-muted-foreground)",
         },
         accent: {
-          DEFAULT: "hsl(240, 5%, 96%)",
-          foreground: "hsl(240, 10%, 10%)",
+          DEFAULT: "var(--color-accent)",
+          foreground: "var(--color-accent-foreground)",
         },
-        border: "hsl(240, 6%, 90%)",
-        ring: "hsl(243, 75%, 59%)",
+        border: "var(--color-border)",
+        ring: "var(--color-ring)",
       },
       borderRadius: {
         lg: `var(--radius)`,
