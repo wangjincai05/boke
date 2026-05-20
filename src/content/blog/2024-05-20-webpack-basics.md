@@ -3,6 +3,9 @@ title: 'Webpack 基础入门'
 date: 2024-03-05
 description: 'Webpack 基础使用教程，包括安装配置、处理样式资源、图片资源、字体图标等'
 tags: ['Webpack', '前端工程化', '构建工具']
+series:
+  name: 'Webpack 入门到精通'
+  order: 1
 ---
 
 ## 前言

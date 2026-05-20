@@ -3,6 +3,9 @@ title: 'Webpack 项目实战：从零搭建 React 和 Vue 脚手架'
 date: 2024-03-19
 description: '使用 Webpack 从零搭建 React-Cli 和 Vue-Cli 的详细配置指南'
 tags: ['Webpack', 'React', 'Vue', '脚手架']
+series:
+  name: 'Webpack 入门到精通'
+  order: 3
 ---
 
 ## 介绍

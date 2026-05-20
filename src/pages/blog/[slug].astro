@@ -6,6 +6,7 @@ import Footer from "../../components/Layout/Footer.astro";
 import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
 import TableOfContents from "../../components/Navigation/TableOfContents.astro";
 import RelatedPosts from "../../components/Content/RelatedPosts.astro";
+import ArticleSeries from "../../components/Content/ArticleSeries.astro";
 import Giscus from "../../components/Content/Giscus.astro";
 import SeoHead from "../../components/SeoHead.astro";
 import CodeCopyButton from "../../components/Content/CodeCopyButton.astro";
@@ -109,6 +110,8 @@ const stats = getReadingStats(post.body);
             <div class="article-content">
               <Content />
             </div>
+
+            <ArticleSeries current={post} allPosts={allPosts} />
 
             <Giscus
               repo={siteConfig.giscus.repo}

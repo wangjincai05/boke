@@ -3,6 +3,9 @@ title: 'Webpack 高级配置与优化'
 date: 2024-03-12
 description: 'Webpack 高级配置指南，包括 SourceMap、热模块替换、代码分割、缓存策略等优化手段'
 tags: ['Webpack', '前端工程化', '性能优化']
+series:
+  name: 'Webpack 入门到精通'
+  order: 2
 ---
 
 ## 介绍

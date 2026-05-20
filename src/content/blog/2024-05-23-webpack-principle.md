@@ -3,6 +3,9 @@ title: 'Webpack 原理深度剖析：Loader 和 Plugin 机制'
 date: 2024-04-02
 description: '深入理解 Webpack 的核心原理，包括 Loader 和 Plugin 的工作机制，以及如何自定义开发'
 tags: ['Webpack', '原理', 'Loader', 'Plugin', '前端工程化']
+series:
+  name: 'Webpack 入门到精通'
+  order: 4
 ---
 
 ## 介绍

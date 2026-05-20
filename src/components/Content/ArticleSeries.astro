@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  current: CollectionEntry<"blog">;
+  allPosts: CollectionEntry<"blog">[];
+}
+
+const { current, allPosts } = Astro.props;
+
+// 如果当前文章没有系列，不显示
+if (!current.data.series) {
+  return;
+}
+
+// 获取同一系列的所有文章，按顺序排序
+const seriesPosts = allPosts
+  .filter((p) => p.data.series?.name === current.data.series?.name && !p.data.draft)
+  .sort((a, b) => (a.data.series?.order || 0) - (b.data.series?.order || 0));
+
+// 找到当前文章在系列中的索引
+const currentIndex = seriesPosts.findIndex((p) => p.id === current.id);
+const prevPost = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
+---
+
+<div class="my-8 rounded-lg border border-border bg-card p-6">
+  <div class="mb-4 flex items-center justify-between">
+    <h3 class="text-sm font-semibold text-muted-foreground">
+      <span class="inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" x2="12" y1="22.08" y2="12"/>
+        </svg>
+        {current.data.series.name}
+      </span>
+    </h3>
+    <span class="text-xs text-muted-foreground">
+      系列共 {seriesPosts.length} 篇，当前第 {currentIndex + 1} 篇
+    </span>
+  </div>
+  
+  <div class="space-y-2">
+    {seriesPosts.map((post, index) => (
+      <a
+        href={`/blog/${post.slug}`}
+        class={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${
+          post.id === current.id
+            ? "bg-primary/10 text-primary font-medium"
+            : "hover:bg-accent text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        <span class={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium ${
+          post.id === current.id
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground"
+        }`}>
+          {index + 1}
+        </span>
+        <span class="flex-1 truncate">{post.data.title}</span>
+        {post.id === current.id && (
+          <span class="text-xs text-primary">当前</span>
+        )}
+      </a>
+    ))}
+  </div>
+  
+  {(prevPost || nextPost) && (
+    <div class="mt-6 flex gap-3 pt-4 border-t border-border">
+      {prevPost ? (
+        <a
+          href={`/blog/${prevPost.slug}`}
+          class="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm hover:bg-accent transition-colors"
+        >
+          <div class="text-xs text-muted-foreground mb-1">← 上一篇</div>
+          <div class="font-medium truncate">{prevPost.data.title}</div>
+        </a>
+      ) : (
+        <div class="flex-1" />
+      )}
+      {nextPost ? (
+        <a
+          href={`/blog/${nextPost.slug}`}
+          class="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm text-right hover:bg-accent transition-colors"
+        >
+          <div class="text-xs text-muted-foreground mb-1">下一篇 →</div>
+          <div class="font-medium truncate">{nextPost.data.title}</div>
+        </a>
+      ) : (
+        <div class="flex-1" />
+      )}
+    </div>
+  )}
+</div>

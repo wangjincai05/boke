@@ -1,0 +1,112 @@
+---
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Layout/Header.astro";
+import Footer from "../../components/Layout/Footer.astro";
+import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { getCollection } from "astro:content";
+
+interface SeriesGroup {
+  name: string;
+  posts: any[];
+}
+
+const allPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft && p.data.series);
+
+// 按系列名称分组
+const seriesMap = new Map<string, any[]>();
+allPosts.forEach((post) => {
+  const name = post.data.series!.name;
+  if (!seriesMap.has(name)) {
+    seriesMap.set(name, []);
+  }
+  seriesMap.get(name)!.push(post);
+});
+
+// 转换为数组并排序
+const seriesList: SeriesGroup[] = Array.from(seriesMap.entries())
+  .map(([name, posts]) => ({
+    name,
+    posts: posts.sort((a, b) => (a.data.series?.order || 0) - (b.data.series?.order || 0)),
+  }))
+  .sort((a, b) => a.posts[0].data.date.getTime() - b.posts[0].data.date.getTime());
+---
+
+<BaseLayout>
+  <SeoHead
+    title="文章系列"
+    description="浏览所有文章系列，系统学习前端开发、后端技术等"
+  />
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <div class="mx-auto max-w-6xl px-4 py-12">
+        <Breadcrumb
+          items={[
+            { label: "首页", href: "/" },
+            { label: "文章系列" },
+          ]}
+        />
+
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold mb-4">文章系列</h1>
+          <p class="text-muted-foreground">
+            共 {seriesList.length} 个系列，{allPosts.length} 篇文章
+          </p>
+        </div>
+
+        {seriesList.length > 0 ? (
+          <div class="grid gap-8">
+            {seriesList.map((series) => (
+              <div
+                key={series.name}
+                class="rounded-lg border border-border bg-card p-6"
+              >
+                <div class="flex items-start justify-between mb-4">
+                  <div>
+                    <h2 class="text-xl font-semibold mb-2 flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" x2="12" y1="22.08" y2="12"/>
+                      </svg>
+                      {series.name}
+                    </h2>
+                    <p class="text-muted-foreground text-sm">
+                      共 {series.posts.length} 篇文章 · 更新于 {series.posts[series.posts.length - 1].data.date.toLocaleDateString("zh-CN")}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  {series.posts.map((post, index) => (
+                    <a
+                      href={`/blog/${post.slug}`}
+                      key={post.id}
+                      class="flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-colors"
+                    >
+                      <span class="flex h-6 w-6 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+                        {index + 1}
+                      </span>
+                      <div class="flex-1">
+                        <div class="font-medium">{post.data.title}</div>
+                        <div class="text-xs text-muted-foreground">{post.data.date.toLocaleDateString("zh-CN")}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12 text-muted-foreground">
+            <p>暂无文章系列</p>
+          </div>
+        )}
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
