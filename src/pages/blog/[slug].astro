@@ -4,10 +4,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Layout/Header.astro";
 import Footer from "../../components/Layout/Footer.astro";
 import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
+import TableOfContents from "../../components/Navigation/TableOfContents.astro";
 import RelatedPosts from "../../components/Content/RelatedPosts.astro";
 import SeoHead from "../../components/SeoHead.astro";
 import CodeCopyButton from "../../components/Content/CodeCopyButton.astro";
 import { getCollection } from "astro:content";
+import { extractHeadings } from "../../lib/toc";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -22,6 +24,13 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const allPosts = (await getCollection("blog")).filter((p) => !p.data.draft);
 const { Content } = await post.render();
+
+let headings = [];
+try {
+  headings = extractHeadings(post.body);
+} catch (e) {
+  console.error("Error extracting headings:", e);
+}
 ---
 
 <BaseLayout>
@@ -36,49 +45,101 @@ const { Content } = await post.render();
   <div class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">
-      <article class="mx-auto max-w-3xl px-4 py-12">
-        <Breadcrumb
-          items={[
-            { label: "首页", href: "/" },
-            { label: "文章", href: "/blog" },
-            { label: post.data.title },
-          ]}
-        />
+      <div class="mx-auto max-w-7xl px-4 py-12">
+        <div class="flex gap-12">
+          <article class="flex-1 min-w-0">
+            <Breadcrumb
+              items={[
+                { label: "首页", href: "/" },
+                { label: "文章", href: "/blog" },
+                { label: post.data.title },
+              ]}
+            />
 
-        <div class="mb-8">
-          <div class="flex flex-wrap gap-2 mb-4">
-            {post.data.tags.map((tag: string) => (
-              <a
-                href={`/tags/${tag.replace(/\//g, "-")}`}
-                class="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
+            <div class="mb-8">
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.data.tags.map((tag: string) => (
+                  <a
+                    href={`/tags/${tag.replace(/\//g, "-")}`}
+                    class="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+              <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-3">
+                {post.data.title}
+              </h1>
+              <p class="text-lg text-muted-foreground mb-4">{post.data.description}</p>
+              <time
+                datetime={post.data.date.toISOString()}
+                class="text-sm text-muted-foreground"
               >
-                {tag}
-              </a>
-            ))}
+                {post.data.date.toLocaleDateString("zh-CN", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+
+            <div class="lg:hidden">
+              <TableOfContents headings={headings} />
+            </div>
+
+            <div class="article-content">
+              <Content />
+            </div>
+
+            <RelatedPosts current={post} all={allPosts} />
+          </article>
+
+          <div class="hidden lg:block">
+            <TableOfContents headings={headings} />
           </div>
-          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-3">
-            {post.data.title}
-          </h1>
-          <p class="text-lg text-muted-foreground mb-4">{post.data.description}</p>
-          <time
-            datetime={post.data.date.toISOString()}
-            class="text-sm text-muted-foreground"
-          >
-            {post.data.date.toLocaleDateString("zh-CN", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
         </div>
-
-        <div class="article-content">
-          <Content />
-        </div>
-
-        <RelatedPosts current={post} all={allPosts} />
-      </article>
+      </div>
     </main>
     <Footer />
   </div>
 </BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const articleContent = document.querySelector(".article-content");
+    if (!articleContent) return;
+
+    const headings = articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+    headings.forEach((heading) => {
+      if (!heading.id) {
+        const slug = heading.textContent
+          ?.toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "-")
+          .replace(/^-|-$/g, "");
+
+        if (slug) {
+          heading.id = slug;
+          heading.classList.add("heading-anchor");
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .heading-anchor {
+    position: relative;
+    scroll-margin-top: 80px;
+  }
+
+  .heading-anchor:hover::before {
+    content: "#";
+    position: absolute;
+    left: -1.5rem;
+    color: var(--primary);
+    opacity: 0.5;
+  }
+</style>

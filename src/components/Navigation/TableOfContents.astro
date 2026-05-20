@@ -1,0 +1,152 @@
+---
+export interface Props {
+  headings?: Array<{
+    slug: string;
+    text: string;
+    depth: number;
+  }>;
+}
+
+const { headings = [] } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <>
+    <div class="lg:hidden mb-8">
+      <button
+        id="toc-toggle"
+        class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" x2="21" y1="6" y2="6"/>
+          <line x1="8" x2="21" y1="12" y2="12"/>
+          <line x1="8" x2="21" y1="18" y2="18"/>
+          <line x1="3" x2="3.01" y1="6" y2="6"/>
+          <line x1="3" x2="3.01" y1="12" y2="12"/>
+          <line x1="3" x2="3.01" y1="18" y2="18"/>
+        </svg>
+        <span>目录</span>
+        <svg id="toc-arrow" class="transition-transform" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+
+      <div id="toc-mobile" class="hidden mt-4 border-l-2 border-border pl-4">
+        {headings.map((heading) => (
+          <a
+            href={`#${heading.slug}`}
+            class="toc-link block text-sm py-1.5 transition-colors leading-relaxed"
+            data-depth={heading.depth}
+            style={{ paddingLeft: `${(heading.depth - 1) * 12}px` }}
+          >
+            {heading.text}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <nav class="toc sticky top-24 self-start w-64 shrink-0" aria-label="目录导航">
+      <div class="space-y-2">
+        <h3 class="text-sm font-semibold text-muted-foreground mb-4">目录</h3>
+        {headings.map((heading) => (
+          <a
+            href={`#${heading.slug}`}
+            class="toc-link block text-sm py-1.5 transition-colors leading-relaxed"
+            data-depth={heading.depth}
+            style={{ paddingLeft: `${(heading.depth - 1) * 12}px` }}
+          >
+            {heading.text}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </>
+)}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocToggle = document.getElementById("toc-toggle");
+    const tocMobile = document.getElementById("toc-mobile");
+    const tocArrow = document.getElementById("toc-arrow");
+    const tocLinks = document.querySelectorAll(".toc-link");
+
+    if (tocToggle && tocMobile && tocArrow) {
+      tocToggle.addEventListener("click", () => {
+        tocMobile.classList.toggle("hidden");
+        tocArrow.classList.toggle("rotate-180");
+      });
+    }
+
+    if (tocLinks.length === 0) return;
+
+    const headings = [];
+
+    tocLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      const id = href.slice(1);
+      const heading = document.getElementById(id);
+      if (heading) {
+        headings.push({
+          link,
+          heading,
+        });
+      }
+    });
+
+    if (headings.length === 0) return;
+
+    const observerOptions = {
+      rootMargin: "-20% 0px -70%",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          headings.forEach(({ link }) => {
+            link.classList.remove("text-primary", "font-medium");
+            link.classList.add("text-muted-foreground");
+          });
+
+          const activeHeading = headings.find(
+            (h) => h.heading.id === entry.target.id
+          );
+
+          if (activeHeading) {
+            activeHeading.link.classList.add("text-primary", "font-medium");
+            activeHeading.link.classList.remove("text-muted-foreground");
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    headings.forEach(({ heading }) => {
+      observer.observe(heading);
+    });
+  });
+</script>
+
+<style>
+  .toc-link {
+    color: var(--muted-foreground);
+  }
+
+  .toc-link:hover {
+    color: var(--foreground);
+  }
+
+  .toc-link.text-primary {
+    color: var(--primary);
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+</style>
