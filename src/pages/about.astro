@@ -3,10 +3,12 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Layout/Header.astro";
 import Footer from "../components/Layout/Footer.astro";
+import CodeCopyButton from "../components/Content/CodeCopyButton.astro";
 import { siteConfig } from "../config";
 ---
 
 <BaseLayout>
+  <CodeCopyButton />
   <div class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">

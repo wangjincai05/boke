@@ -1,0 +1,125 @@
+---
+export interface Props {
+  autoInit?: boolean;
+}
+
+const { autoInit = true } = Astro.props;
+---
+
+{autoInit && (
+  <button
+    class="code-copy-btn hidden"
+    id="code-copy-btn"
+    aria-label="复制代码"
+  >
+    <span class="copy-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+      </svg>
+    </span>
+    <span class="check-icon hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </span>
+  </button>
+)}
+
+<style>
+  .code-copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.5rem;
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .code-copy-btn:hover {
+    background: var(--color-accent);
+    transform: scale(1.05);
+  }
+
+  .code-copy-btn:active {
+    transform: scale(0.95);
+  }
+
+  .code-copy-btn.copied {
+    background: #22c55e;
+    color: white;
+  }
+
+  .code-block-has-copy .code-copy-btn {
+    display: inline-flex;
+  }
+</style>
+
+<script>
+  function initCodeCopy() {
+    const articleContent = document.querySelector(".article-content");
+    if (!articleContent) return;
+
+    const codeBlocks = articleContent.querySelectorAll("pre");
+    const copyBtn = document.getElementById("code-copy-btn");
+    if (!copyBtn) return;
+
+    codeBlocks.forEach((pre) => {
+      if (pre.querySelector(".code-copy-btn")) return;
+
+      pre.style.position = "relative";
+      pre.classList.add("code-block-has-copy");
+
+      const btn = copyBtn.cloneNode(true) as HTMLElement;
+      btn.id = "";
+      btn.classList.remove("hidden");
+      btn.style.opacity = "0";
+
+      pre.appendChild(btn);
+
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        const code = pre.querySelector("code");
+        const text = code?.textContent || pre.textContent || "";
+
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add("copied");
+          btn.querySelector(".copy-icon")?.classList.add("hidden");
+          btn.querySelector(".check-icon")?.classList.remove("hidden");
+
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.querySelector(".copy-icon")?.classList.remove("hidden");
+            btn.querySelector(".check-icon")?.classList.add("hidden");
+          }, 2000);
+        } catch (err) {
+          console.error("复制失败:", err);
+        }
+      });
+
+      pre.addEventListener("mouseenter", () => {
+        btn.style.opacity = "1";
+      });
+
+      pre.addEventListener("mouseleave", () => {
+        if (!btn.classList.contains("copied")) {
+          btn.style.opacity = "0";
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initCodeCopy);
+</script>

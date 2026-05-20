@@ -6,6 +6,7 @@ import Footer from "../../components/Layout/Footer.astro";
 import Breadcrumb from "../../components/Navigation/Breadcrumb.astro";
 import RelatedPosts from "../../components/Content/RelatedPosts.astro";
 import SeoHead from "../../components/SeoHead.astro";
+import CodeCopyButton from "../../components/Content/CodeCopyButton.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -31,6 +32,7 @@ const { Content } = await post.render();
     publishedTime={post.data.date}
     tags={post.data.tags}
   />
+  <CodeCopyButton />
   <div class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">
