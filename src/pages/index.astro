@@ -5,7 +5,6 @@ import Header from "../components/Layout/Header.astro";
 import Footer from "../components/Layout/Footer.astro";
 import ArticleList from "../components/Content/ArticleList.astro";
 import TagCloud from "../components/Content/TagCloud.astro";
-import SearchBar from "../components/Content/SearchBar.astro";
 import { getCollection } from "astro:content";
 import { getAllTags } from "../lib/search";
 
@@ -30,8 +29,10 @@ const tags = getAllTags(posts);
           <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
             记录技术心得，分享开发经验
           </p>
-          <div class="max-w-md mx-auto">
-            <SearchBar />
+          <div class="flex items-center justify-center gap-6 text-sm text-muted-foreground">
+            <span>{posts.length} 篇文章</span>
+            <span class="text-border">|</span>
+            <span>{tags.length} 个标签</span>
           </div>
         </div>
       </section>
@@ -56,6 +57,10 @@ const tags = getAllTags(posts);
                     class="inline-flex items-center rounded-lg border border-border bg-card px-6 py-2.5 text-sm font-medium text-card-foreground hover:bg-accent transition-colors"
                   >
                     查看全部 {posts.length} 篇文章
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2">
+                      <path d="M5 12h14"/>
+                      <path d="m12 5 7 7-7 7"/>
+                    </svg>
                   </a>
                 </div>
               )}

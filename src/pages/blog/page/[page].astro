@@ -1,0 +1,81 @@
+---
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Layout/Header.astro";
+import Footer from "../../components/Layout/Footer.astro";
+import ArticleList from "../../components/Content/ArticleList.astro";
+import Pagination from "../../components/Navigation/Pagination.astro";
+import SeoHead from "../../components/SeoHead.astro";
+import { getCollection } from "astro:content";
+
+const { page } = Astro.params;
+
+export async function getStaticPaths() {
+  const allPosts = (await getCollection("blog"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+  const perPage = 9;
+  const totalPages = Math.ceil(allPosts.length / perPage);
+
+  const paths = [];
+
+  for (let i = 2; i <= totalPages; i++) {
+    paths.push({
+      params: { page: String(i) },
+      props: {
+        allPosts,
+        currentPage: i,
+        totalPages,
+        perPage,
+      },
+    });
+  }
+
+  return paths;
+}
+
+const currentPage = Astro.props.currentPage;
+const totalPages = Astro.props.totalPages;
+const allPosts = Astro.props.allPosts;
+const perPage = Astro.props.perPage;
+
+const startIndex = (currentPage - 1) * perPage;
+const posts = allPosts.slice(startIndex, startIndex + perPage);
+---
+
+<BaseLayout>
+  <SeoHead
+    title={`文章列表 - 第 ${currentPage} 页`}
+    description={`浏览技术文章第 ${currentPage} 页，共 ${totalPages} 页`}
+  />
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <div class="mx-auto max-w-6xl px-4 py-12">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold mb-2">文章列表</h1>
+          <p class="text-muted-foreground">
+            第 {currentPage} / {totalPages} 页，共 {allPosts.length} 篇文章
+          </p>
+        </div>
+
+        {posts.length > 0 ? (
+          <>
+            <ArticleList posts={posts} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              baseUrl="/blog"
+            />
+          </>
+        ) : (
+          <div class="text-center py-12 text-muted-foreground">
+            <p>暂无文章</p>
+          </div>
+        )}
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>

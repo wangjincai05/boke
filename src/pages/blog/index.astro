@@ -5,7 +5,8 @@ import Header from "../../components/Layout/Header.astro";
 import Footer from "../../components/Layout/Footer.astro";
 import ArticleList from "../../components/Content/ArticleList.astro";
 import TagCloud from "../../components/Content/TagCloud.astro";
-import SearchBar from "../../components/Content/SearchBar.astro";
+import Pagination from "../../components/Navigation/Pagination.astro";
+import SeoHead from "../../components/SeoHead.astro";
 import { getCollection } from "astro:content";
 import { getAllTags } from "../../lib/search";
 
@@ -23,37 +24,36 @@ const posts = allPosts.slice((currentPage - 1) * perPage, currentPage * perPage)
 ---
 
 <BaseLayout>
+  <SeoHead
+    title="文章列表"
+    description="浏览所有技术文章，包括前端开发、后端技术、开发工具等"
+  />
   <div class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">
       <div class="mx-auto max-w-6xl px-4 py-12">
         <div class="mb-8">
           <h1 class="text-3xl font-bold mb-4">文章列表</h1>
-          <div class="max-w-md">
-            <SearchBar />
-          </div>
+          <p class="text-muted-foreground">
+            共 {allPosts.length} 篇文章
+          </p>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-[1fr_280px]">
           <div>
-            <ArticleList posts={posts} />
-
-            {totalPages > 1 && (
-              <nav class="mt-8 flex items-center justify-center gap-2" aria-label="分页导航">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <a
-                    href={`/blog?page=${p}`}
-                    class:list={[
-                      "inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
-                      p === currentPage
-                        ? "bg-primary text-primary-foreground"
-                        : "border border-border bg-card text-card-foreground hover:bg-accent",
-                    ]}
-                  >
-                    {p}
-                  </a>
-                ))}
-              </nav>
+            {posts.length > 0 ? (
+              <>
+                <ArticleList posts={posts} />
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  baseUrl="/blog"
+                />
+              </>
+            ) : (
+              <div class="text-center py-12 text-muted-foreground">
+                <p>暂无文章</p>
+              </div>
             )}
           </div>
 

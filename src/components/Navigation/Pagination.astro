@@ -1,0 +1,119 @@
+---
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+const showEllipsisStart = currentPage > 3;
+const showEllipsisEnd = currentPage < totalPages - 2;
+
+function getPageUrl(page: number): string {
+  if (page === 1) return baseUrl;
+  return `${baseUrl}/page/${page}`;
+}
+
+const pages = [];
+
+if (totalPages <= 7) {
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+} else {
+  pages.push(1);
+
+  if (showEllipsisStart) {
+    pages.push("...");
+  }
+
+  const start = Math.max(2, currentPage - 1);
+  const end = Math.min(totalPages - 1, currentPage + 1);
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  if (showEllipsisEnd) {
+    pages.push("...");
+  }
+
+  pages.push(totalPages);
+}
+---
+
+{totalPages > 1 && (
+  <nav class="flex items-center justify-center gap-2 mt-12" aria-label="分页导航">
+    <a
+      href={getPageUrl(currentPage - 1)}
+      class:list={[
+        "px-3 py-2 rounded-lg border text-sm font-medium transition-colors",
+        currentPage === 1
+          ? "border-border bg-muted text-muted-foreground cursor-not-allowed opacity-50"
+          : "border-border bg-card text-card-foreground hover:bg-accent hover:border-primary/50",
+      ]}
+      aria-disabled={currentPage === 1}
+      tabindex={currentPage === 1 ? -1 : 0}
+    >
+      <span class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        上一页
+      </span>
+    </a>
+
+    <div class="flex items-center gap-1">
+      {pages.map((page, index) => (
+        page === "..." ? (
+          <span class="px-3 py-2 text-muted-foreground">...</span>
+        ) : (
+          <a
+            href={getPageUrl(page as number)}
+            class:list={[
+              "min-w-[40px] h-10 px-3 rounded-lg border text-sm font-medium transition-colors flex items-center justify-center",
+              page === currentPage
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-border bg-card text-card-foreground hover:bg-accent hover:border-primary/50",
+            ]}
+            aria-current={page === currentPage ? "page" : undefined}
+          >
+            {page}
+          </a>
+        )
+      ))}
+    </div>
+
+    <a
+      href={getPageUrl(currentPage + 1)}
+      class:list={[
+        "px-3 py-2 rounded-lg border text-sm font-medium transition-colors",
+        currentPage === totalPages
+          ? "border-border bg-muted text-muted-foreground cursor-not-allowed opacity-50"
+          : "border-border bg-card text-card-foreground hover:bg-accent hover:border-primary/50",
+      ]}
+      aria-disabled={currentPage === totalPages}
+      tabindex={currentPage === totalPages ? -1 : 0}
+    >
+      <span class="flex items-center gap-1">
+        下一页
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </span>
+    </a>
+  </nav>
+)}
+
+<style>
+  @media (max-width: 640px) {
+    nav {
+      gap: 0.5rem;
+    }
+
+    a span:not(.flex) {
+      display: none;
+    }
+  }
+</style>
