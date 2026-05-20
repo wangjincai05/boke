@@ -5,6 +5,7 @@ import Header from "../../components/Layout/Header.astro";
 import Footer from "../../components/Layout/Footer.astro";
 import ArticleList from "../../components/Content/ArticleList.astro";
 import TagCloud from "../../components/Content/TagCloud.astro";
+import SearchBar from "../../components/Content/SearchBar.astro";
 import Pagination from "../../components/Navigation/Pagination.astro";
 import SeoHead from "../../components/SeoHead.astro";
 import { getCollection } from "astro:content";
@@ -34,9 +35,12 @@ const posts = allPosts.slice((currentPage - 1) * perPage, currentPage * perPage)
       <div class="mx-auto max-w-6xl px-4 py-12">
         <div class="mb-8">
           <h1 class="text-3xl font-bold mb-4">文章列表</h1>
-          <p class="text-muted-foreground">
+          <p class="text-muted-foreground mb-4">
             共 {allPosts.length} 篇文章
           </p>
+          <div class="max-w-md">
+            <SearchBar />
+          </div>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-[1fr_280px]">
