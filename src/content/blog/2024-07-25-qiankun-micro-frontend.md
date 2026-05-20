@@ -1,6 +1,6 @@
 ---
 title: 'Qiankun 微前端架构实战教程'
-date: 2024-07-25
+date: 2024-08-20
 description: '基于实际项目演示如何使用 qiankun 构建微前端架构，包含主应用配置、子应用改造、全局状态管理和部署方案'
 tags: ['微前端', 'Qiankun', 'Vue', 'React', '架构']
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'Nginx SSE 流式响应配置详解'
-date: 2024-07-21
+date: 2024-06-15
 description: '详解 Nginx 配置 SSE（Server-Sent Events）流式响应的关键参数，解决前端无法流式接收数据的问题'
 tags: ['Nginx', 'SSE', '流式响应', '服务器配置']
 ---

@@ -1,6 +1,6 @@
 ---
 title: '前端高效删除 node_modules 方法总结'
-date: 2024-06-04
+date: 2024-05-10
 description: '介绍多种高效删除 node_modules 的方法，解决手动删除慢的问题，提升开发效率'
 tags: ['前端工具', 'npm', '性能优化', '命令行']
 ---

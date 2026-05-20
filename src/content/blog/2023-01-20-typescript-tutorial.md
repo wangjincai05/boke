@@ -1,7 +1,7 @@
 ---
 title: "TypeScript 高级技巧：类型体操入门"
 description: "探索 TypeScript 的高级类型特性，从泛型到条件类型，掌握类型体操的核心技巧。"
-date: 2023-01-20
+date: 2023-06-10
 tags: ["TypeScript", "前端", "编程"]
 categories: ["前端"]
 featured: true

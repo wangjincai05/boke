@@ -1,6 +1,6 @@
 ---
 title: 'TypeScript 5.x 完整使用指南'
-date: 2025-05-20
+date: 2025-03-20
 description: 'TypeScript 从入门到精通，涵盖基础类型、接口、泛型、高级类型、tsconfig 配置等核心内容'
 tags: ['TypeScript', '前端', 'JavaScript', '类型系统']
 ---

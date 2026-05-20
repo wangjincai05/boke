@@ -1,7 +1,7 @@
 ---
 title: "欢迎来到我的博客"
 description: "这是我的第一篇博客文章，介绍这个博客和未来的写作计划。"
-date: 2023-01-01
+date: 2023-03-15
 tags: ["博客", "介绍"]
 categories: ["生活"]
 featured: true
