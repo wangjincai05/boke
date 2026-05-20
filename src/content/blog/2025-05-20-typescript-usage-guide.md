@@ -1,8 +1,9 @@
 ---
-title: 'TypeScript 5.x 完整使用指南'
+title: 'TypeScript 完整指南：从入门到类型体操'
 date: 2025-03-20
-description: 'TypeScript 从入门到精通，涵盖基础类型、接口、泛型、高级类型、tsconfig 配置等核心内容'
-tags: ['TypeScript', '前端', 'JavaScript', '类型系统']
+description: 'TypeScript 从入门到精通，涵盖基础类型、接口、泛型、高级类型、类型体操及 tsconfig 配置等核心内容'
+tags: ['TypeScript', '前端', 'JavaScript', '类型系统', '类型体操']
+featured: true
 ---
 
 ## 1. TypeScript 简介
@@ -127,6 +128,8 @@ let dog: Dog = {
 ## 4. 泛型 (Generics)
 
 ### 4.1 泛型基础
+
+泛型是类型体操的基础，它允许我们编写可复用的类型定义：
 
 ```typescript
 // 使用泛型 - 保留类型信息
@@ -327,7 +330,14 @@ type PartialPerson = Partial<Person>;
 
 ### 8.2 条件类型
 
+条件类型允许我们根据条件来创建类型：
+
 ```typescript
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<"hello">; // true
+type B = IsString<42>;      // false
+
 type NonNullable<T> = T extends null | undefined ? never : T;
 
 type ReturnType<T extends (...args: any) => any> = 
@@ -356,9 +366,51 @@ type FooReturn = ReturnType<typeof foo>;  // { a: number, b: number }
 | `ReturnType<T>` | 获取函数类型的返回值类型 |
 | `Parameters<T>` | 获取函数类型的参数类型元组 |
 
-## 9. 模块
+## 9. 类型体操进阶
 
-### 9.1 导出与导入
+### 9.1 为什么学习类型体操
+
+TypeScript 的类型系统非常强大，它不仅可以帮助我们在编译时捕获错误，还能通过高级类型特性来表达复杂的业务逻辑。
+
+类型体操（Type Gymnastics）指的是利用 TypeScript 的类型系统来解决复杂类型问题的方法。掌握这些技巧可以让你写出更安全、更优雅的 TypeScript 代码。
+
+### 9.2 实用技巧
+
+#### 提取 Promise 类型
+
+```typescript
+type Awaited<T> = T extends Promise<infer U> ? U : T;
+
+type R = Awaited<Promise<string>>; // string
+```
+
+#### 深度 Partial
+
+```typescript
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+};
+```
+
+#### 联合类型转交叉类型
+
+```typescript
+type UnionToIntersection<T> =
+  (T extends any ? (x: T) => any : never) extends (x: infer R) => any
+    ? R
+    : never;
+```
+
+### 9.3 实际应用场景
+
+1. **API 响应类型推导**：从 API 路由定义自动推导响应类型
+2. **表单验证**：类型安全的表单状态管理
+3. **状态管理**：类型安全的状态机实现
+4. **ORM 类型安全**：数据库查询的类型保证
+
+## 10. 模块
+
+### 10.1 导出与导入
 
 **导出：**
 
@@ -394,9 +446,9 @@ import * as validator from "./ZipCodeValidator";
 import DefaultValidator from "./ZipCodeValidator";
 ```
 
-## 10. tsconfig.json 配置
+## 11. tsconfig.json 配置
 
-### 10.1 常用配置选项
+### 11.1 常用配置选项
 
 ```json
 {
@@ -416,7 +468,7 @@ import DefaultValidator from "./ZipCodeValidator";
 }
 ```
 
-### 10.2 严格模式选项
+### 11.2 严格模式选项
 
 | 选项 | 说明 |
 |------|------|
@@ -425,9 +477,9 @@ import DefaultValidator from "./ZipCodeValidator";
 | `noImplicitThis` | 禁止隐式 this 类型 |
 | `alwaysStrict` | 在严格模式下解析并输出 |
 
-## 11. TypeScript 5.x 新特性
+## 12. TypeScript 5.x 新特性
 
-### 11.1 TypeScript 5.8 新特性
+### 12.1 TypeScript 5.8 新特性
 
 **返回表达式中的分支细粒度检查：**
 
@@ -445,7 +497,7 @@ function getUrl(urlString: string): URL {
 
 禁止包含运行时语义的 TypeScript 语法，确保代码可被擦除为纯 JavaScript。
 
-### 11.2 TypeScript 5.9 新特性
+### 12.2 TypeScript 5.9 新特性
 
 - **简化的 tsconfig.json**：生成的配置文件更加精简
 - **支持 import defer**：支持延迟导入提案
@@ -453,7 +505,7 @@ function getUrl(urlString: string): URL {
 
 ## 结语
 
-TypeScript 是现代 JavaScript 开发的重要工具，通过添加类型系统大大提高了代码的可维护性和可靠性。随着 TypeScript 的不断发展，它将继续成为前端开发的首选语言。
+TypeScript 是现代 JavaScript 开发的重要工具，通过添加类型系统大大提高了代码的可维护性和可靠性。从基础类型到高级类型体操，掌握这些知识将使你成为更优秀的前端开发者。
 
 ### 参考资源
 

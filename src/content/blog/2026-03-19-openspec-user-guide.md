@@ -57,7 +57,7 @@ openspec init
 
 选择要配置的 AI 工具（空格选择，回车确认）：
 
-```
+```bash
 ? Which AI tools do you want to configure?
 ❯◉ Claude Code
  ◯ Cursor
@@ -76,7 +76,7 @@ openspec init --tools claude,cursor  # 指定工具
 
 ### 整体结构
 
-```
+```bash
 your-project/
 ├── .openspec/                  # 内部配置（自动生成）
 ├── openspec/                   # OpenSpec 工作目录
@@ -91,7 +91,7 @@ your-project/
 
 每个变更一个独立文件夹：
 
-```
+```bash
 openspec/changes/<change-name>/
 ├── proposal.md           # 提案（必需）
 ├── specs/<domain>/       # 能力规范（必需）
@@ -103,7 +103,7 @@ openspec/changes/<change-name>/
 
 已归档规范的长期存储，按业务域组织：
 
-```
+```bash
 openspec/specs/
 ├── account/
 │   └── spec.md
@@ -151,7 +151,7 @@ openspec/specs/
 
 ### 完整流程
 
-```
+```bash
 /opsx:explore    → 想不清楚时探索
 /opsx:propose    → 需求清晰后提案
 /opsx:apply      → 按任务实现代码
@@ -199,7 +199,7 @@ openspec/specs/
 | **CORRECTNESS** | 实现是否与 specs 定义一致（如 `< 5` vs `<= 5`） |
 | **COHERENCE** | 代码是否忠实执行 design.md 的技术决策 |
 
-```
+```bash
 /opsx:verify account-auto-pricing
 
 COMPLETENESS
@@ -226,7 +226,7 @@ Ready to archive: Yes (with warnings)
    - `REMOVED` → 从主 spec 删除
 
 2. **变更文件夹移入 archive 目录**
-   ```
+   ```bash
    openspec/changes/archive/
    └── 2026-04-08-account-auto-pricing/
    ```
