@@ -4,7 +4,7 @@ description: "深入浅出地介绍 Astro 框架的核心概念和使用方法�
 date: 2023-04-20
 tags: ["Astro", "前端", "静态站点"]
 categories: ["前端"]
-featured: true
+featured: false
 ---
 
 ## 什么是 Astro？

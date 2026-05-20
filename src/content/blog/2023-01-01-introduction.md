@@ -4,7 +4,7 @@ description: "这是我的第一篇博客文章，介绍这个博客和未来的
 date: 2023-03-15
 tags: ["博客", "介绍"]
 categories: ["生活"]
-featured: true
+featured: false
 ---
 
 ## 关于这个博客

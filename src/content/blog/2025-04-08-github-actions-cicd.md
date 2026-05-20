@@ -3,6 +3,7 @@ title: 'GitHub Actions CI/CD 静态网站部署实战教程'
 date: 2025-02-15
 description: '从零开始掌握自动化部署流程，涵盖 GitHub Pages、Vercel、阿里云 OSS 等多种部署方案'
 tags: ['GitHub Actions', 'CI/CD', 'DevOps', '自动化部署']
+featured: true
 ---
 
 ## 1. CI/CD 基础概念

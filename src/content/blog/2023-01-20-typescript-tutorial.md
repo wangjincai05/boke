@@ -4,7 +4,7 @@ description: "探索 TypeScript 的高级类型特性，从泛型到条件类型
 date: 2023-06-10
 tags: ["TypeScript", "前端", "编程"]
 categories: ["前端"]
-featured: true
+featured: false
 ---
 
 ## 为什么学习类型体操？
