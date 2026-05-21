@@ -1,6 +1,6 @@
 ---
 title: 'TypeScript 完整指南：从入门到类型体操'
-date: 2025-03-20
+date: 2024-04-20
 description: 'TypeScript 从入门到精通，涵盖基础类型、接口、泛型、高级类型、类型体操及 tsconfig 配置等核心内容'
 tags: ['TypeScript', '前端', 'JavaScript', '类型系统', '类型体操']
 featured: true

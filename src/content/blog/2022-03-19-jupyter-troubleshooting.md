@@ -1,6 +1,6 @@
 ---
 title: 'Jupyter 相关项目常见问题排查手册'
-date: 2024-01-29
+date: 2022-03-19
 description: 'Jupyter Lab、Notebook 部署和使用过程中的常见问题及解决方案'
 tags: ['Jupyter', '问题排查', '故障处理', '调试']
 ---

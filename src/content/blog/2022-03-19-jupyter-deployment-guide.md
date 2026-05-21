@@ -1,6 +1,6 @@
 ---
 title: 'Jupyter 相关项目部署配置说明文档'
-date: 2024-01-15
+date: 2022-03-19
 description: '详细介绍 Jupyter Lab、Notebook、主题及自定义扩展的完整部署配置流程'
 tags: ['Jupyter', '部署', '配置', '扩展开发']
 ---

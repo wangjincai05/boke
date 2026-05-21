@@ -1,6 +1,6 @@
 ---
 title: 'Jupyter 部署配置快速参考手册'
-date: 2024-01-22
+date: 2022-03-19
 description: 'Jupyter Lab 部署配置的核心命令、关键目录和常见问题解决方案速查手册'
 tags: ['Jupyter', 'Python', '部署', '配置']
 ---
