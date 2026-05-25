@@ -1,6 +1,6 @@
 ---
 title: 'Tailwind CSS 完整教程文档'
-date: 2024-05-21
+date: 2024-05-10
 description: '基于 Tailwind CSS v3.4 的完整教程，涵盖安装配置、基础概念、响应式设计、状态变体、自定义配置及高级功能'
 tags: ['CSS', 'Tailwind CSS', '前端框架', '样式']
 featured: true
