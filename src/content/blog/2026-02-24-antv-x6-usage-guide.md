@@ -767,6 +767,5 @@ graph.use(new Snapline())
 - [AntV X6 官方文档](https://x6.antv.antgroup.com)
 - [GitHub 仓库](https://github.com/antvis/X6)
 - [X6 Examples](https://x6.antv.antgroup.com/examples)
-- [在线 Playground](https://x6.antv.antgroup.com/playground)
 
 > 本文档基于 AntV X6 v3.1.7 编写，如有疑问请参考官方文档。

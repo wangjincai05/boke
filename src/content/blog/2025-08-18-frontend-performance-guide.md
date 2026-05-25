@@ -929,7 +929,7 @@ window.addEventListener('unhandledrejection', (event) => {
 
 ### 8.3 性能优化流程
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │  1. 基准测试       │  使用 Lighthouse 获取基准分数        │
 ├─────────────────────────────────────────────────────────────┤
@@ -955,9 +955,3 @@ window.addEventListener('unhandledrejection', (event) => {
 4. **持续监控**：建立性能监控体系，及时发现性能退化
 
 ---
-
-**参考资源：**
-- [Web Vitals](https://web.dev/vitals/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
-- [Chrome DevTools](https://developer.chrome.com/docs/devtools)
-- [WebPageTest](https://www.webpagetest.org/)

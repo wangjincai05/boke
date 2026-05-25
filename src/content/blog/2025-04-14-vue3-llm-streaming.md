@@ -641,9 +641,3 @@ onUnmounted(() => {
 3. **性能优化不可忽视**：使用节流/throttle 防止高频 DOM 更新
 4. **AbortController 要管理好**：组件卸载时必须清理
 5. **多 provider 适配**：预留 provider 配置字段，方便后续扩展
-
-### 参考资料
-
-- [Vue 3 实战：如何优雅地处理大模型 SSE 流式数据](https://blog.csdn.net/2501_93411574/article/details/160980940)
-- [Vue 3 实现 AI 流式输出](https://juejin.cn/post/7586973107322241064)
-- [从 chunk 到对话：Vue 3 实现 LLM 流式输出](https://juejin.cn/post/7580550040395841571)

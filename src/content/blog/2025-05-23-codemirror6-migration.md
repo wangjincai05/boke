@@ -833,5 +833,3 @@ const state = EditorState.create({
 ### 参考资料
 
 - [CodeMirror 6 官方配置示例](https://codemirror.net/examples/config/)
-- [Vue 3 + CodeMirror 6 组件开发](https://nbsaas.blog.csdn.net/article/details/159785020)
-- [vue-codemirror6 使用指南](https://blog.csdn.net/gitblog_00448/article/details/153916467)
