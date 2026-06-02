@@ -5,8 +5,6 @@ description: '面向前端开发者的实战指南：从零到上线，打造一
 tags: ['Astro', '博客', 'SSG', '前端', '性能优化']
 ---
 
-# Astro 现代化博客搭建全记录
-
 > 面向前端开发者的实战指南：从零到上线，打造一个快到离谱的个人博客
 
 **作者按**：这篇文章不是翻译官方文档。我搭建博客过程中踩的坑、做的选择、为什么不选 Next.js/Nuxt，全写在这里。你照着做，半天出站。
@@ -62,7 +60,7 @@ npm create astro@latest my-blog
 
 ### 2.2 项目结构
 
-```
+```bash
 my-blog/
 ├── public/              # 静态资源（不经过构建）
 │   ├── favicon.svg
@@ -508,10 +506,10 @@ import Callout from '../components/Callout.astro';
   Tailwind CSS v4 和 v3 的配置方式完全不同，别混用！
 </Callout>
 
-```bash
+```
 npm install @astrojs/tailwind
-```
-```
+
+```bash
 
 ---
 
@@ -631,7 +629,7 @@ vercel
 
 ### 10.1 我的发文流程
 
-```
+```bash
 1. 构思 → 在 src/content/blog/ 下创建 draft-xxx.md（draft: true）
 2. 写作 → 本地 dev server 实时预览
 3. 校对 → 改 draft: false，检查 frontmatter 完整性

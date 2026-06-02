@@ -121,7 +121,7 @@ socket.on('newMessage', (data) => {
 
 ### 项目结构
 
-```
+```bash
 websocket-chat/
 ├── server.js
 ├── public/

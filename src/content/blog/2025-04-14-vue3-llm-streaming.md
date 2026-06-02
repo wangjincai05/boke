@@ -5,8 +5,6 @@ description: '基于真实项目踩坑经验，详解如何在Vue3中处理大�
 tags: ['Vue3', '大模型', 'SSE', '流式输出', 'AI']
 ---
 
-# Vue3接入大模型流式输出实战
-
 > **作者按**：这不是官方文档的翻译，而是基于真实项目踩坑经验的实战总结。如果你正在做 AI 聊天类应用，需要在前端处理大模型的流式响应，这篇文章会告诉你那些官方文档不会明说的坑。
 
 ## 一、为什么不用原生 EventSource
@@ -132,7 +130,7 @@ function stopGeneration() {
 
 SSE 数据长这样：
 
-```
+```bash
 data: {"choices":[{"delta":{"content":"你好"}}]}
 data: {"choices":[{"delta":{"content":"，"}}]}
 data: {"choices":[{"delta":{"content":"我是"}}]}
