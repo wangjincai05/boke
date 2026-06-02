@@ -5,8 +5,6 @@ description: '基于真实项目(SQL Lab)迁移经验，详解从CodeMirror 5升
 tags: ['CodeMirror', '编辑器', 'Vue3', 'SQL', '迁移']
 ---
 
-# CodeMirror 6 迁移实战指南
-
 > **作者按**：这不是 CodeMirror 官方文档的中文翻译，而是基于真实项目（SQL Lab 开发经验）迁移 CodeMirror 5 到 CodeMirror 6 的踩坑总结。如果你正在评估是否要升级，或者正在迁移过程中，这篇文章会告诉你哪些地方会出问题。
 
 ## 一、CodeMirror 5 vs 6：核心架构差异

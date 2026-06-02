@@ -6,8 +6,6 @@ tags: ['CSS', 'Tailwind CSS', '前端框架', '样式']
 featured: true
 ---
 
-# Tailwind CSS 完整教程文档
-
 > 基于 Tailwind CSS v3.4 | 2024 年 1 月发布
 
 ---
