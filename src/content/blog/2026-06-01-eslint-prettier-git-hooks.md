@@ -6,7 +6,7 @@ tags: ['ESLint', 'Prettier', 'Git Hooks', '工程化', 'Vue3']
 ---
 
 
-> 本文是技术博客系列的第 20 篇，聚焦 Vue3 + TypeScript + Vite 项目的工程化配置。
+> 本文聚焦 Vue3 + TypeScript + Vite 项目的工程化配置。
 
 ## 前言：为什么工程化配置必须做？
 
