@@ -37,7 +37,7 @@ npm run preview
 
 ## 文章结构
 
-```
+```bash
 src/content/blog/
 ├── 2024-01-01-title.md
 ├── 2024-01-15-another-title.md

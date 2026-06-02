@@ -5,7 +5,6 @@ description: 'Vue3 + TypeScript + Vite 项目的完整工程化配置方案，�
 tags: ['ESLint', 'Prettier', 'Git Hooks', '工程化', 'Vue3']
 ---
 
-# ESLint 9 + Prettier + Git 提交校验：前端工程化配置实战
 
 > 本文是技术博客系列的第 20 篇，聚焦 Vue3 + TypeScript + Vite 项目的工程化配置。
 
@@ -354,7 +353,7 @@ export default {
 
 ### 2.3 创建 .prettierignore
 
-```
+```bash
 # 忽略格式化
 dist
 node_modules

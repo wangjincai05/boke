@@ -793,7 +793,7 @@ const state = EditorState.create({
 
 ### 迁移决策树
 
-```
+```bash
 你的项目需要迁移到 CodeMirror 6 吗？
 
 ├── 只是临时用用，不需要长期维护？

@@ -90,7 +90,7 @@ import ReportCenter from '@/views/Report/index.vue'
 
 ### 3.2 方案：三层分割策略
 
-```
+```bash
 第一层：路由级分割 —— 不同路由加载不同 chunk
 第二层：组件级分割 —— 重组件（ECharts、编辑器）按需加载
 第三层：能力级分割 —— 导出PDF、批量上传等独立 chunk

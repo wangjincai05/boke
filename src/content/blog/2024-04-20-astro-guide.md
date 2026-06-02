@@ -34,7 +34,7 @@ yarn create astro
 
 一个典型的 Astro 项目结构如下：
 
-```
+```bash
 my-astro-project/
 ├── src/
 │   ├── components/    # 可复用组件

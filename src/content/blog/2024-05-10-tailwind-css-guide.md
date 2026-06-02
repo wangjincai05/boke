@@ -127,7 +127,7 @@ export default nextConfig;
 
 Tailwind 的工具类遵循一致的命名模式：
 
-```
+```bash
 [属性]-[值]-[状态]
 
 例如：
