@@ -1,6 +1,6 @@
 ---
 title: 'Vue3 + Vitest 单元测试实战指南'
-date: 2026-05-25
+date: 2026-05-31
 description: '从零开始搭建Vue3项目单元测试环境，涵盖组件测试、Composables测试、Pinia Store测试、Mock技巧、覆盖率配置与CI集成'
 tags: ['Vue3', 'Vitest', '单元测试', '测试', '前端工程化']
 ---

@@ -1,11 +1,9 @@
 ---
 title: 'Vue3 前端权限系统设计实战：RBAC + 动态路由 + 按钮级权限'
-date: 2026-05-25
+date: 2026-05-28
 description: '基于真实项目经验，详解Vue3 + Pinia + Vue Router的完整权限系统实现，包含RBAC模型、动态路由、按钮级权限、权限缓存与刷新'
 tags: ['Vue3', '权限系统', 'RBAC', '动态路由', 'Pinia']
 ---
-
-# Vue3 前端权限系统设计实战：RBAC + 动态路由 + 按钮级权限
 
 > 权限系统是中大型后台管理系统的核心，本文基于真实项目经验，从零开始构建一套完整的权限系统。
 
@@ -36,7 +34,7 @@ tags: ['Vue3', '权限系统', 'RBAC', '动态路由', 'Pinia']
 
 RBAC（Role-Based Access Control，基于角色的访问控制）是最常用的权限模型，核心思想：
 
-```
+```bash
 用户 → 角色 → 权限
 ```
 
@@ -1148,7 +1146,7 @@ router.beforeEach(async (to, from, next) => {
 
 ### 8.1 推荐目录结构
 
-```
+```bash
 src/
 ├── api/                          # API 接口
 │   ├── user.ts                   # 用户相关接口

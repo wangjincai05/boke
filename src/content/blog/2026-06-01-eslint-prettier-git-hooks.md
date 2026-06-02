@@ -432,7 +432,7 @@ trailingComma: 'all',  // 类型导入也要尾随逗号
 
 ### 3.1 整体架构
 
-```
+```bash
 ┌─────────────────────────────────────────────────────────┐
 │                    git commit                           │
 └─────────────────────┬───────────────────────────────────┘
@@ -676,7 +676,7 @@ chmod +x .git/hooks/*
 
 ### 4.1 格式说明
 
-```
+```bash
 <type>(<scope>): <subject>
 
 [optional body]
@@ -702,7 +702,7 @@ chmod +x .git/hooks/*
 
 ### 4.3 提交示例
 
-```
+```bash
 feat(auth): 新增微信扫码登录功能
 
 - 集成微信 OAuth2.0 授权
@@ -712,7 +712,7 @@ feat(auth): 新增微信扫码登录功能
 Closes #123
 ```
 
-```
+```bash
 fix(cart): 修复商品数量为0时仍可下单的问题
 
 问题原因：未对数量进行校验
@@ -843,7 +843,7 @@ npm install -D commitizen cz-conventional-changelog
 
 ### 6.2 工作流程
 
-```
+```bash
 1. 写代码
    ↓
 2. 保存时自动格式化（Prettier）
