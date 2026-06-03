@@ -147,15 +147,28 @@ const stats = getReadingStats(post.body);
 
     const headings = articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
-    headings.forEach((heading) => {
-      if (!heading.id) {
-        const slug = heading.textContent
-          ?.toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "-")
-          .replace(/^-|-$/g, "");
+    const generateSlug = (text) => {
+      const cleanedText = text
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/__([^_]+)__/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/(?<!_)_([^_]+)_(?!_)/g, '$1')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1');
 
+      return cleanedText
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "-")
+        .replace(/^-|-$/g, "");
+    };
+
+    headings.forEach((heading) => {
+      const text = heading.textContent;
+      if (text) {
+        const slug = generateSlug(text);
         if (slug) {
           heading.id = slug;
           heading.classList.add("heading-anchor");
