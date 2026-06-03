@@ -534,9 +534,8 @@ export function handleNodeMouseOver(node: Node): void {
 
 ---
 
-**项目地址**：`[https://github.com/wangjincai05/antvX6](https://github.com/wangjincai05/antvX6)`
-
-**预览地址**：`[https://workflow.wantasy.asia/](https://workflow.wantasy.asia/)`
+**项目地址**：[https://github.com/wangjincai05/antvX6](https://github.com/wangjincai05/antvX6)
+**预览地址**：[https://workflow.wantasy.asia/](https://workflow.wantasy.asia/)
 
 **核心文件清单**：
 - `src/utils/dag-validator.ts` - DAG 校验
