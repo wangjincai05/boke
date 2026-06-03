@@ -12,7 +12,7 @@ featured: true
 
 本工作流编辑器基于 **Vue 3 + TypeScript + Pinia** 技术栈，核心图形渲染依赖 **AntV X6** 图引擎。整体采用 **分层架构**，从下到上依次为：
 
-```
+```bash
 ┌─────────────────────────────────────────────────────────────┐
 │                    视图层 (View Layer)                      │
 │  WorkflowEditor | Toolbar | InspectorPanel | DryRunPanel    │
