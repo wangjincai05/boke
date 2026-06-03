@@ -3,7 +3,7 @@ title: 'AntV X6 图编辑引擎使用文档'
 date: 2026-01-10
 description: 'AntV X6 是蚂蚁集团开源的图编辑引擎，提供高性能、高可定制的图编辑能力，适用于流程图编辑器、ER 图、BPMN 编辑器等场景'
 tags: ['AntV X6', '图编辑', '可视化', '流程图']
-featured: true
+featured: false
 ---
 
 ## 1. 概述

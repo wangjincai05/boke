@@ -3,6 +3,7 @@ title: 'AntV-X6构建AI智能体工作流编辑器：完整实现技术解析'
 date: 2026-06-03
 description: '基于Vue3 + TypeScript + AntV X6构建的AI智能体工作流编辑器，涵盖DAG循环检测、拓扑排序、执行器实现、性能优化等核心技术'
 tags: ['AntV', 'X6', '工作流', 'DAG', 'Vue3']
+featured: true
 ---
 
 ## 一、项目架构设计
